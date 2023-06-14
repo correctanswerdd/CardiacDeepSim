@@ -1,0 +1,13 @@
+# Terminal
+docker run --gpus all -p 8888:8888 -it pytorch/pytorch:latest
+
+# Docker
+apt update
+apt install -y git
+apt-get update && apt-get install ffmpeg libsm6 libxext6  -y
+pip install jupyter
+pip install matplotlib
+pip install torchdiffeq
+pip install seaborn
+jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+

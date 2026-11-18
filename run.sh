@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
 # Every step of the paper in Docker (see README.md). Run from any directory; outputs go to ./outputs/<step>/.
 #   ./run.sh simulate [--steps N] [--check]          step 01: cbcbeat simulation -> outputs/01_simulate/output.pickle
-#   ./run.sh make-data [--source published]          step 02: data set -> outputs/02_make_data/dataset.npy
+#   ./run.sh make-data [--source simulation|published]  step 02: data set -> outputs/02_make_data/dataset.npy
 #   ./run.sh train lstm|node [--seed 0]              step 03: retrain a model (GPU) -> outputs/03_train/
 #   ./run.sh evaluate table1 [--checkpoints DIR]     step 04: Table 1 -> outputs/04_evaluate/table1.{json,md}
 #   ./run.sh figures fig1_traces|fig2_vm_comparison|fig3_long_term|fig4_propagation
 #                                                    step 05: one figure -> outputs/05_figures/
-#   ./run.sh paper                                   steps 02 (from published/), 04 and 05: every number and figure
 # Images cds-sim:2026-11 (Dockerfile.sim) and cds-torch:2026-11 (Dockerfile) are built the first time.
 # The paper's data is read from ./published/ (PUBLISHED_DIR=<path> to use another folder).
 # Training uses the GPU (docker --gpus all); GPUS=none trains on the CPU. Steps 02, 04, 05 always run on the CPU.
@@ -44,8 +43,5 @@ case "$mode" in
                    *) echo "train lstm|node" >&2; exit 2 ;; esac ;;
     evaluate)  name="${1:?evaluate needs a script name, e.g. table1}"; shift; torch_cpu python "04_evaluate/$name.py" "$@" ;;
     figures)   name="${1:?figures needs a script name, e.g. fig2_vm_comparison}"; shift; torch_cpu python "05_figures/$name.py" "$@" ;;
-    paper)     [ -f "$(cd "$(dirname "$0")" && pwd)/outputs/02_make_data/dataset.npy" ] || torch_cpu python 02_make_data/make_data.py --source published
-               torch_cpu python 04_evaluate/table1.py
-               for f in fig1_traces fig2_vm_comparison fig3_long_term fig4_propagation; do torch_cpu python "05_figures/$f.py"; done ;;
     *)         sed -n '2,/^set /p' "$0" | grep '^#'; exit 2 ;;
 esac

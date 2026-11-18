@@ -6,14 +6,32 @@
 
 - Docker（Windows 用 Docker Desktop）。
 - bash（Windows 用 Git Bash 或 WSL）。
+- 第 3 步用 NVIDIA GPU（Docker 要能用 `--gpus all`）。
 
-第一次运行 `./run.sh` 时用 `Dockerfile` 和 `requirements.txt` 构建镜像。
+第一次运行 `./run.sh` 时构建两个镜像：
+
+| 镜像 | 文件 | 用在 |
+|---|---|---|
+| `cds-sim:2026-11` | `Dockerfile.sim` | 第 1 步 |
+| `cds-torch:2026-11` | `Dockerfile` + `requirements.txt` | 第 2 到 5 步 |
 
 ## 2. 按顺序的命令
 
 ```bash
+# 第 1 步：仿真
+./run.sh simulate
+
+# 第 2 步：数据集
 ./run.sh make-data
+
+# 第 3 步：训练
+./run.sh train lstm
+./run.sh train node
+
+# 第 4 步：Table 1
 ./run.sh evaluate table1
+
+# 第 5 步：图
 ./run.sh figures fig1_traces
 ./run.sh figures fig2_vm_comparison
 ./run.sh figures fig3_long_term

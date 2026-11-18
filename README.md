@@ -12,7 +12,6 @@
 05_figures/     Fig 1（里面的波形）、Fig 2、Fig 3、Fig 4                   -> outputs/05_figures
 checkpoints/    论文的两个模型：LSTMbest.pt、NeuralODE.pt
 published/      论文的数据
-legacy/         原始 notebook 和仿真脚本
 ```
 
 ## 1. 安装环境
@@ -104,8 +103,6 @@ common.py                     路径、数据、归一化、两个模型和它�
 04_evaluate/table1.py
 05_figures/fig1_traces.py, fig2_vm_comparison.py, fig3_long_term.py, fig4_propagation.py, _style.py
 checkpoints/                  论文的两个模型
-legacy/                       原始 notebook（lstm_autoregressor、neuralode、lstm_neuralode_comparison）、
-                              仿真脚本和环境说明
 published/                    论文的数据
 outputs/                      运行结果
 ```

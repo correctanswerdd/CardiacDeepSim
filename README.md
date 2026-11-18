@@ -2,16 +2,6 @@
 
 论文：W. Dong, Y. Li, R. Zhu, "Deep-Learning-Assisted Cardiac Electrophysiology Simulation," *2023 Winter Simulation Conference (WSC)*, San Antonio, TX, 2023, pp. 758-769. https://doi.org/10.1109/WSC60868.2023.10408359
 
-```
-01_simulate/    cbcbeat 仿真                    -> outputs/01_simulate
-02_make_data/   数据集                          -> outputs/02_make_data
-03_train/       训练 LSTM 和 Neural ODE         -> outputs/03_train
-04_evaluate/    Table 1                         -> outputs/04_evaluate
-05_figures/     Fig 1（波形）、Fig 2、Fig 3、Fig 4 -> outputs/05_figures
-checkpoints/    LSTMbest.pt、NeuralODE.pt
-published/      output0328-1.pickle（仿真数据）
-```
-
 ## 1. 安装环境
 
 - Docker（Windows 用 Docker Desktop）。

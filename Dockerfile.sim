@@ -1,0 +1,8 @@
+# cds-sim: step 01 (cbcbeat, FEniCS 2019). Built by run.sh:  docker build -f Dockerfile.sim -t cds-sim:2026-11 .
+# The base image is the upstream simcardems image pinned by digest (Ubuntu 22.04, Python 3.10, FEniCS/dolfin
+# 2019.2.0.dev0); it already contains cbcbeat (/usr/lib/python3/dist-packages/cbcbeat), nothing else is needed.
+FROM ghcr.io/computationalphysiology/simcardems@sha256:9ca323b03c9e78b0737abaf4179d53612ef25288836b2fabf3186cd029b54a7e
+
+ENV OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
+WORKDIR /work
+ENTRYPOINT []

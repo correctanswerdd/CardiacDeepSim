@@ -6,18 +6,10 @@
 
 - Docker（Windows 用 Docker Desktop）。
 - bash（Windows 用 Git Bash 或 WSL）。
-- 第 3 步用 NVIDIA GPU（Docker 要能用 `--gpus all`）。
 
-第一次运行 `./run.sh` 时构建两个镜像：
-
-| 镜像 | 文件 | 用在 |
-|---|---|---|
-| `cds-sim:2026-11` | `Dockerfile.sim` | 第 1 步 |
-| `cds-torch:2026-11` | `Dockerfile` + `requirements.txt` | 第 2 到 5 步 |
+第一次运行 `./run.sh` 时用 `Dockerfile` 和 `requirements.txt` 构建镜像。
 
 ## 2. 按顺序的命令
-
-### A. 用论文的数据和模型
 
 ```bash
 ./run.sh make-data
@@ -26,17 +18,6 @@
 ./run.sh figures fig2_vm_comparison
 ./run.sh figures fig3_long_term
 ./run.sh figures fig4_propagation
-```
-
-（`./run.sh paper` 依次运行以上命令。）
-
-### B. 从头跑
-
-```bash
-./run.sh simulate
-./run.sh make-data
-./run.sh train lstm
-./run.sh train node
 ```
 
 ## 3. 论文里每一项对应的脚本和输出

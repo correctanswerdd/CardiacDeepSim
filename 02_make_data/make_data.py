@@ -4,8 +4,8 @@ Reads the (54801, 24, 24, 4) simulation array, flattens the grid to 576 cells (c
 checks the 80/20 split lengths and the z-scored Vm range of the data set. The z-scoring and the 80/20 split
 are done where the data is used (common.py); this step only stores the flattened array.
 
-    python3 02_make_data/make_data.py                       # from outputs/01_simulate/output.pickle
-    python3 02_make_data/make_data.py --source published    # from published/output0328-1.pickle
+    python3 02_make_data/make_data.py   # outputs/01_simulate/output.pickle if step 01 was run, else published/
+    python3 02_make_data/make_data.py --source simulation|published
 """
 import argparse
 import os
@@ -19,8 +19,11 @@ from common import (DATASET, FINGERPRINT, N_ATTR, N_CELLS, N_STEPS, OUTPUTS, PUB
                     PUBLISHED_DATA_SHA256, out_dir, preprocess, sha256, split, write_json)
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--source", choices=["simulation", "published"], default="simulation")
+parser.add_argument("--source", choices=["auto", "simulation", "published"], default="auto")
 args = parser.parse_args()
+if args.source == "auto":
+    args.source = "simulation" if os.path.isfile(os.path.join(OUTPUTS, "01_simulate", "output.pickle")) else "published"
+print("source:", args.source)
 
 if args.source == "published":
     src = os.path.join(PUBLISHED, PUBLISHED_DATA)

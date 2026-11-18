@@ -20,7 +20,7 @@
 ### A. 用论文的数据和模型
 
 ```bash
-./run.sh make-data --source published
+./run.sh make-data
 ./run.sh evaluate table1
 ./run.sh figures fig1_traces
 ./run.sh figures fig2_vm_comparison
@@ -37,7 +37,6 @@
 ./run.sh make-data
 ./run.sh train lstm
 ./run.sh train node
-./run.sh evaluate table1 --checkpoints outputs/03_train
 ```
 
 ## 3. 论文里每一项对应的脚本和输出
